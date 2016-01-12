@@ -1,15 +1,13 @@
 <div *ngIf="character">
   <h4>{{editName | uppercase}} details</h4>
 
-  <form action="#">
-
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <label class="mdl-textfield__label" for="id">ID {{character.id}}</label>
     </div>
 
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <label class="mdl-textfield__label" for="name"></label>
-      <input type="text" id="name" class="mdl-textfield__input" [(ngModel)]="editName" (keyup)="filterChanged($event)" />
+      <input type="text" id="name" class="mdl-textfield__input" [(ngModel)]="editName"/>
     </div>
 
     <div>
@@ -19,5 +17,5 @@
       <button class="dashboard-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
       " (click)="cancel()">Cancel</button>
     </div>
-  </form>
+
 </div>
