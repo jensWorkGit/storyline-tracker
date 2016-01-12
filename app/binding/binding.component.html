@@ -1,0 +1,45 @@
+<div>
+		<h2>Binding</h2>
+
+		<h4>Interpolation</h4>
+		<pre>Hello { {firstName }}</pre>
+		<div>Hello {{firstName}}</div>
+		<hr>
+
+		<h4>Property Binding Without Two-Way</h4>
+		<pre>&lt;input [value]="city"></pre>
+		<input [value]="city">
+		<p>City = {{city}}</p>
+		<hr>
+
+		<h4>Binding With Two-Way (Long Form)</h4>
+		<pre>&lt;input [value]="city" (input)="city = $event.target.value"></pre>
+		<input [value]="city" (input)="city = $event.target.value">
+		<p>City = {{city}}</p>
+		<hr>
+
+		<h4>Two-Way Binding (ngModel directive long form)</h4>
+		<pre>&lt;input [ngModel]="firstName" (ngModel)="firstName=$event"/> </pre>
+		<input [ngModel]="firstName" (ngModel)="firstName=$event"/> {{firstName}}
+		<hr>
+
+		<h4>Two-Way Binding (sugar)</h4>
+		<pre>&lt;input [(ngModel)]="lastName" /> </pre>
+		<input [(ngModel)]="lastName" /> {{lastName}}
+		<hr>
+
+		<h4>Two-Way Binding (classic style)</h4>
+		<pre>&lt;input bindOnNgModel="city" /></pre>
+		<input bindOnNgModel="city" /> {{city}}
+		<hr>
+
+		<h4>Local Variables</h4>
+		<pre>
+&lt;input #mylocalvar/>{ {mylocalvar.value}}
+&lt;button (click)="addThing(mylocalvar.value)">Add Local Var&lt;/button>
+		</pre>
+		<input #mylocalvar/>{{mylocalvar.value}}
+		<button (click)="addThing(mylocalvar.value)">Add Local Var</button>
+
+		<div>Async Piped Data from 500ms delay = {{ dataAsync | async | json }}</div>
+</div>

@@ -1,0 +1,16 @@
+<div>
+  <h2>My Characters</h2>
+  <filter-text [text]="filterText" (changed)="filterChanged($event)"></filter-text>
+  <ul class="characters">
+    <li *ngFor="#character of filteredCharacters | sortCharacters"
+      [class.selected]="character === selectedCharacter"
+      (click)="onSelect(character)">
+      <span class="badge">{{character.id}}</span> {{character.name | initCaps}}
+    </li>
+  </ul>
+  <div *ngIf="selectedCharacter">
+    <h2>{{selectedCharacter.name}} is my Character</h2>
+		<button (click)="goDetail()">View Details</button>
+    <taba-character-detail [character]="selectedCharacter"></taba-character-detail>
+  </div>
+</div>
