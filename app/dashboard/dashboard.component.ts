@@ -28,12 +28,12 @@ export class DashboardComponent implements OnInit {
     if (CONFIG.useHttpWithRx) {
       this._characterService.getCharacters()
         .subscribe((characters: Character[]) => {
-          this.characters = characters;
+          this.characters = characters.slice(0,6);
         });
       //TODO: How would this work if I wanted to use RxPipe ?
     } else {
       this._characterService.getCharacters_ViaPromise()
-        .then((characters: Character[]) => this.characters = characters);
+        .then((characters: Character[]) => this.characters = characters.slice(0,6));
     }
 
     return this.characters;

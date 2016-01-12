@@ -18,6 +18,12 @@ a.router-link-active {
 }
 */
 
+.mdl-layout__header {
+  position: fixed;
+}
+.mdl-layout__content {
+  margin-top: 96px;
+}
 .mdl-layout__tab.router-link-active,
 .mdl-layout__tab.is-active {
     color: rgb(255,255,255)

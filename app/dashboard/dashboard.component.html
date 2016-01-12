@@ -2,11 +2,13 @@
 
 <div>
   <style>
+
   </style>
 
   <div class="mdl-grid">
     <div class="mdl-cell mdl-cell--3-col" *ngFor="#character of characters" (click)="gotoDetail(character)">
-      <button class="dashboard-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+      <button class="dashboard-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
+      mdl-button--accent">
         {{character.name}}
       </button>
     </div>
