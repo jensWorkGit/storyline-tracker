@@ -6,15 +6,15 @@ import { CONFIG } from '../config';
 
 @Component({
   selector: 'my-dashboard',
-	templateUrl: 'app/dashboard/dashboard.component.html',
+  templateUrl: 'app/dashboard/dashboard.component.html',
   styleUrls: ['app/dashboard/dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-	characters: Character[];
+  characters: Character[];
 
   constructor(private _characterService: CharacterService, private _router: Router) { }
 
-	ngOnInit() {
+  ngOnInit() {
     this.characters = this.getCharacters();
   }
 
@@ -28,12 +28,12 @@ export class DashboardComponent implements OnInit {
     if (CONFIG.useHttpWithRx) {
       this._characterService.getCharacters()
         .subscribe((characters: Character[]) => {
-          this.characters = characters.slice(0,16);
+          this.characters = characters.slice(0, 16);
         });
       //TODO: How would this work if I wanted to use RxPipe ?
     } else {
       this._characterService.getCharacters_ViaPromise()
-        .then((characters: Character[]) => this.characters = characters.slice(0,16));
+        .then((characters: Character[]) => this.characters = characters.slice(0, 16));
     }
 
     return this.characters;
