@@ -1,5 +1,6 @@
 <div>
-  <h2>My Characters</h2>
+  <h4>My Characters</h4>
+
   <filter-text [text]="filterText" (changed)="filterChanged($event)"></filter-text>
   <ul class="characters">
     <li *ngFor="#character of filteredCharacters | sortCharacters" [class.selected]="character === selectedCharacter">
@@ -18,12 +19,8 @@
         </div>
       </div>
 
-
-
-
     </li>
   </ul>
-
 
   <div *ngIf="selectedCharacter">
     <h2>{{selectedCharacter.name}} is my Character</h2>

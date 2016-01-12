@@ -4,11 +4,14 @@ import { Component, EventEmitter } from 'angular2/core';
   selector: 'filter-text',
   outputs: ['changed'],
   template: `
-    <form>
-         Filter:
-         <input type="text"
+    <form action="#">
+      <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+        <label class="mdl-textfield__label" for="foo">Filter...</label>
+         <input type="text" id="foo"
+                class="mdl-textfield__input"
                 [(ngModel)]="filter"
                 (keyup)="filterChanged($event)" />
+      </div>
     </form>
   `
 })
