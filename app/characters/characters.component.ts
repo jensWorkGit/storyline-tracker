@@ -1,7 +1,7 @@
 import { Component, OnInit } from 'angular2/core';
-import { Router } from 'angular2/router';
+import { ROUTER_DIRECTIVES } from 'angular2/router';
+
 import { Character } from './character';
-import { CharacterDetailComponent } from './character-detail.component';
 import { CharacterService } from './character.service';
 import { FilterService } from '../blocks/filter.service';
 import { FilterTextComponent } from '../blocks/filter-text.component';
@@ -9,10 +9,12 @@ import { InitCapsPipe } from '../blocks/init-caps.pipe'
 import { SortCharactersPipe } from './sort-characters.pipe'
 import { CONFIG } from '../config';
 
+//TODO: not using init caps pipe right now
+
 @Component({
   selector: 'taba-characters',
   templateUrl: './app/characters/characters.component.html',
-  directives: [CharacterDetailComponent, FilterTextComponent],
+  directives: [FilterTextComponent, ROUTER_DIRECTIVES],
   styleUrls: ['./app/characters/characters.component.css'],
   pipes: [InitCapsPipe, SortCharactersPipe],
   providers: [FilterService]
@@ -20,16 +22,14 @@ import { CONFIG } from '../config';
 export class CharactersComponent implements OnInit {
   characters: Character[];
   filteredCharacters = this.characters;
-  selectedCharacter: Character;
   filterText = '';
 
   constructor(
     private _filterService: FilterService,
-    private _characterService: CharacterService,
-    private _router: Router) { }
+    private _characterService: CharacterService) {
+  }
 
   getCharacters() {
-    this.selectedCharacter = undefined;
     this.characters = [];
 
     if (CONFIG.useHttpWithRx) {
@@ -47,16 +47,8 @@ export class CharactersComponent implements OnInit {
     return this.characters;
   }
 
-  goDetail() {
-    this._router.navigate(['CharacterDetail', {id: this.selectedCharacter.id}]);
-  }
-
   ngOnInit() {
     this.characters = this.getCharacters();
-  }
-
-  onSelect(character: Character) {
-    this.selectedCharacter = character;
   }
 
   filterChanged(searchText: string) {

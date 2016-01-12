@@ -11,7 +11,7 @@
 {{character.name}}</h2>
         </div>
         <div class="mdl-card__menu">
-          <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" (click)="onSelect(character)">
+          <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" [routerLink]="['CharacterDetail', {id: character.id}]">
 
             <div class="icon mdl-color--accent icon-ic_play_circle_filled_white_24dp"></div>
 
@@ -21,10 +21,4 @@
 
     </li>
   </ul>
-
-  <div *ngIf="selectedCharacter">
-    <h2>{{selectedCharacter.name}} is my Character</h2>
-    <button (click)="goDetail()">View Details</button>
-    <taba-character-detail [character]="selectedCharacter"></taba-character-detail>
-  </div>
 </div>
