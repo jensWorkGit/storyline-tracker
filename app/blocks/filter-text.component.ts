@@ -6,8 +6,8 @@ import { Component, EventEmitter } from 'angular2/core';
   template: `
     <form>
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <label class="mdl-textfield__label" for="foo">Filter...</label>
-         <input type="text" id="foo"
+        <label class="mdl-textfield__label" for="filterText">Filter...</label>
+         <input type="text" id="filterText"
                 class="mdl-textfield__input"
                 [(ngModel)]="filter"
                 (keyup)="filterChanged($event)" />
