@@ -4,13 +4,13 @@
       <a class="md-title-icon" ng-href="http://pluralsight.com" target="_blank"><i></i></a>
       <span class="mdl-layout-title">Storyline Tracker</span>
     </div>
-    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
-      <a *ngFor="#item of menuItems" [routerLink]="item.link" class="mdl-layout__tab"
+    <div class="mdl-navigation">
+      <a *ngFor="#item of menuItems" [routerLink]="item.link" class="nav-link"
       href="">{{item.caption}}</a>
     </div>
   </header>
   <main class="mdl-layout__content">
-    <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+    <section>
       <div class="page-content">
         <router-outlet></router-outlet>
       </div>

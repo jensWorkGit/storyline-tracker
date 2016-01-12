@@ -27,6 +27,7 @@ export class CharactersComponent implements OnInit {
   constructor(
     private _filterService: FilterService,
     private _characterService: CharacterService) {
+    componentHandler.upgradeDom();
   }
 
   getCharacters() {
@@ -48,6 +49,7 @@ export class CharactersComponent implements OnInit {
   }
 
   ngOnInit() {
+    componentHandler.upgradeDom();
     this.characters = this.getCharacters();
   }
 

@@ -9,6 +9,7 @@ import { DialogService } from '../blocks/dialog.service';
 @Component({
   selector: 'taba-character-detail',
   templateUrl: 'app/characters/character-detail.component.html',
+  styles: ['.mdl-textfield__label {top: 0;}'],
   directives: [ROUTER_DIRECTIVES]
 })
 export class CharacterDetailComponent implements CanDeactivate, OnChanges, OnInit {
@@ -20,7 +21,8 @@ export class CharacterDetailComponent implements CanDeactivate, OnChanges, OnIni
     private _characterService: CharacterService,
     private _dialogService: DialogService,
     private _routeParams: RouteParams,
-    private _router: Router) { }
+    private _router: Router) {
+  }
 
   gotoCharacters() {
     let route = ['Characters', { id: this.character ? this.character.id : null }]
@@ -47,20 +49,21 @@ export class CharacterDetailComponent implements CanDeactivate, OnChanges, OnIni
   }
 
   ngOnChanges(changes: any) {
-    // On every change of the inputs
     console.log(changes);
   }
 
   ngOnInit() {
+    componentHandler.upgradeDom();
+
     if (!this.character) {
       let id = +this._routeParams.get('id');
 
       if (CONFIG.useHttpWithRx) {
         this._characterService.getCharacter(id)
-          .subscribe((character: Character) => {this.setCharacter(character)});
+          .subscribe((character: Character) => { this.setCharacter(character) });
       } else {
         this._characterService.getCharacter_ViaPromise(id)
-          .then(character => {this.setCharacter(character)});
+          .then(character => { this.setCharacter(character) });
       }
     }
   }

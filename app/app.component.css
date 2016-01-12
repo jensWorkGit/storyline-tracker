@@ -4,29 +4,28 @@
 .mdl-layout__content {
   margin-top: 96px;
 }
-.mdl-layout__tab.router-link-active,
-.mdl-layout__tab.is-active {
-    color: rgb(255,255,255)
+
+.nav-link {
+  padding: 0 1em;
+  width: 100px;
+  color: rgba(255,255,255,.6);
+  text-align: center;
+  text-decoration: none;
 }
 
-.mdl-layout__tab.router-link-active::after,
-.mdl-layout__tab.is-active::after {
-    height: 4px;
+.router-link-active {
+  color: rgba(255,255,255, 1);
+}
+
+.router-link-active::after {
+    height: 2px;
     width: 100%;
     display: block;
     content: " ";
     bottom: 0;
     left: 0;
-    position: absolute;
+    position: inherit;
     background: rgb(255,64,129);
-    /*-webkit-animation: border-expand .2s cubic-bezier(.4,0,.4,1).01s alternate forwards;
-    animation: border-expand .2s cubic-bezier(.4,0,.4,1).01s alternate forwards;
-    -webkit-transition: all 1s cubic-bezier(.4,0,1,1);
-    transition: all 1s cubic-bezier(.4,0,1,1)*/
-}
-
-.mdl-layout__tab-bar {
-  height: inherit;
 }
 
 .md-title-icon > i {
@@ -42,13 +41,10 @@
     padding-left: 8px;
 }
 
-.mdl-layout__header {
-  background-color: #222;
-}
-
+/*.mdl-layout__header,
 .mdl-layout__tab-bar {
   background-color: #222;
-}
+}*/
 
 .page-content {
   margin: 2em;
