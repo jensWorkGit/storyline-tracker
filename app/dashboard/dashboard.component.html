@@ -1,8 +1,15 @@
 <h3>Top Characters</h3>
-<div class="grid grid-pad">
-	<div *ngFor="#character of characters" class="col-1-4" (click)="gotoDetail(character)">
-		<div class="module character">
-			<h4>{{character.name}}</h4>
-		</div>
-	</div>
+
+<div>
+  <style>
+  </style>
+
+  <div class="mdl-grid">
+    <div class="mdl-cell mdl-cell--3-col" *ngFor="#character of characters" (click)="gotoDetail(character)">
+      <button class="dashboard-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--colored">
+        {{character.name}}
+      </button>
+    </div>
+  </div>
+
 </div>

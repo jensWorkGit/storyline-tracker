@@ -10,15 +10,8 @@ import { DialogService } from './blocks/dialog.service';
 
 @Component({
   selector: 'taba-app',
-  template: `
-    <nav>
-      <a [routerLink]="['Dashboard']">Dashboard</a>
-      <a [routerLink]="['CharactersDashboard']">Characters</a>
-      <a [routerLink]="['Binding']">Binding Demo</a>
-    </nav>
-    <router-outlet></router-outlet>
-  `,
-  styles: ['app/app.component.css'],
+  templateUrl: 'app/app.component.html',
+  styleUrls: ['app/app.component.css'],
   directives: [ROUTER_DIRECTIVES],
   providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS, CharacterService, DialogService]
 })
@@ -27,4 +20,10 @@ import { DialogService } from './blocks/dialog.service';
   { path: '/binding', name: 'Binding', component: BindingComponent },
 	{ path: '/characters/...', name: 'CharactersDashboard', component: CharactersDashboardComponent	},
 ])
-export class AppComponent { }
+export class AppComponent {
+  public menuItems = [
+    { caption: 'Dashboard', link: ['Dashboard'] },
+    { caption: 'Characters', link: ['CharactersDashboard'] },
+    { caption: 'Binding', link: ['Binding'] }
+  ];
+}
