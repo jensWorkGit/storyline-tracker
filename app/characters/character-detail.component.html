@@ -1,10 +1,23 @@
 <div *ngIf="character">
-	<h2>View {{editName | uppercase}} details!</h2>
-	<div><label>id: </label>{{character.id}}</div>
-	<div>
-		<label>name: </label>
-		<input [(ngModel)]="editName" placeholder="name">
-	</div>
-  <button (click)="save()">Save</button>
-  <button (click)="cancel()">Cancel</button>
+  <h4>{{editName | uppercase}} details</h4>
+
+  <form action="#">
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <label class="mdl-textfield__label" for="id">ID {{character.id}}</label>
+    </div>
+
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <label class="mdl-textfield__label" for="name"></label>
+      <input type="text" id="name" class="mdl-textfield__input" [(ngModel)]="editName" (keyup)="filterChanged($event)" />
+    </div>
+
+    <div>
+      <button class="dashboard-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
+      mdl-button--accent" (click)="save()">Save</button>
+      &nbsp;
+      <button class="dashboard-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect
+      " (click)="cancel()">Cancel</button>
+    </div>
+  </form>
 </div>
