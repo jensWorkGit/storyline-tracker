@@ -1,8 +1,9 @@
 .mdl-layout__header {
   position: fixed;
+  background-color: #222;
 }
 .mdl-layout__content {
-  margin-top: 96px;
+  margin-top: 68px;
 }
 
 .nav-link {
@@ -13,12 +14,12 @@
   text-decoration: none;
 }
 
-.router-link-active {
+.nav-link.router-link-active {
   color: rgba(255,255,255, 1);
 }
 
-.router-link-active::after {
-    height: 2px;
+.nav-link.router-link-active::after {
+    height: 3px;
     width: 100%;
     display: block;
     content: " ";
@@ -39,12 +40,8 @@
     height: 56px;
     padding: 0 16px 0 72px;
     padding-left: 8px;
+    background-color: #222;
 }
-
-/*.mdl-layout__header,
-.mdl-layout__tab-bar {
-  background-color: #222;
-}*/
 
 .page-content {
   margin: 2em;
