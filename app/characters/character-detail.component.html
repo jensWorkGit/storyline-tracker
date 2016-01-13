@@ -1,10 +1,6 @@
 <div *ngIf="character">
   <h4>{{editName | uppercase}} details</h4>
 
-    <!--<modal-confirm [title]="'Cancel changes?'" [message]="'Do you want to cancel your changes?'"></modal-confirm>-->
-
-    <modal-confirm></modal-confirm>
-
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <label class="mdl-textfield__label" for="nametext">Name</label>
       <input type="text" id="nametext" class="mdl-textfield__input" [(ngModel)]="editName" />

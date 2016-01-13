@@ -5,8 +5,7 @@
       <span class="mdl-layout-title">Storyline Tracker</span>
     </div>
     <div class="mdl-navigation">
-      <a *ngFor="#item of menuItems" [routerLink]="item.link" class="nav-link"
-      href="">{{item.caption}}</a>
+      <a *ngFor="#item of menuItems" [routerLink]="item.link" class="nav-link" href="">{{item.caption}}</a>
     </div>
   </header>
   <main class="mdl-layout__content">
@@ -16,4 +15,5 @@
       </div>
     </section>
   </main>
+  <modal-confirm></modal-confirm>
 </div>

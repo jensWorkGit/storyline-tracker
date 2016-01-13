@@ -6,13 +6,15 @@ import { BindingComponent } from './binding/binding.component';
 import { CharactersDashboardComponent } from './characters/characters-dashboard.component';
 import { CharacterService } from './characters/character.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ModalService } from './blocks/modal/modal.service'
+import { ModalComponent } from './blocks/modal/modal.component';
 
 @Component({
   selector: 'taba-app',
   templateUrl: 'app/app.component.html',
   styleUrls: ['app/app.component.css'],
-  directives: [ROUTER_DIRECTIVES],
-  providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS, CharacterService]
+  directives: [ROUTER_DIRECTIVES, ModalComponent],
+  providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS, CharacterService, ModalService]
 })
 @RouteConfig([
   { path: '/dashboard', name: 'Dashboard', component: DashboardComponent, useAsDefault: true },

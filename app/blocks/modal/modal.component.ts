@@ -1,100 +1,86 @@
-import { Component } from 'angular2/core';
+import { Component, OnInit } from 'angular2/core';
 import { ModalService } from './modal.service'
+
+declare var $: any;
+const KEY_ESC = 27;
+const KEYUP_DIALOG = 'keyup.dialog';
 
 @Component({
   selector: 'modal-confirm',
-  templateUrl:'app/blocks/modal/modal.component.html',
-  styleUrls: ['app/blocks/modal/modal.component.css'],
-  providers: [ModalService]
+  templateUrl: 'app/blocks/modal/modal.component.html',
+  styleUrls: ['app/blocks/modal/modal.component.css']
 })
-export class ModalComponent {
+export class ModalComponent implements OnInit {
   title: string;
   message: string;
   okText: string;
   cancelText: string;
+  negativeOnClick: (e: any) => void;
+  positiveOnClick: (e: any) => void;
 
-  constructor(private _modalService: ModalService) {}
+  private _modalElement: any;
+  private _cancelButton: any;
+  private _okButton: any;
 
-  showDialog() {
-    // this.title = this._modalService.config.title || this.title;
-    // this.message = this._modalService.config.message || this.message;
-    // this.okText = this._modalService.config.okText || this.okText;
-    // this.cancelText = this._modalService.config.cancelText || this.cancelText;
-
-    return new Promise<boolean>((resolve, reject) => {
-      let options = {
-        title: this.title = this.title || 'Confirmation',
-        text: this.message = this.message || 'Do you want to cancel your changes?',
-        negative: {
-          title: this.cancelText = this.cancelText || 'Cancel',
-          onClick: (e: any) => resolve(false)
-        },
-        positive: {
-          title: this.okText = this.okText || 'OK',
-          onClick: (e: any) => resolve(true)
-        }
-      };
-      showDialog(options);
-    });
+  constructor(private _modalService: ModalService) {
+    this._modalService.activate = this.activate.bind(this);
   }
-}
 
-declare var $: any;
-const KEY_ESC = 27;
-
-function showDialog(options: any) {
-  options = $.extend({
-    id: 'theModalDialog',
-    title: null,
-    text: null,
-    negative: false,
-    positive: false,
-    cancelable: true
-  }, options);
-
-  $(document).unbind('keyup.dialog');
-
-  var dialog = $('#theModalDialog');
-  dialog.css({ display: 'inline' });
-
-  if (options.negative || options.positive) {
-    var buttonBar = $('.dialog-button-bar');
-    if (options.negative) {
-      options.negative = $.extend({ onClick: () => false }, options.negative);
-
-      $('#negative').click((e: any) => {
-        e.preventDefault();
-        if (!options.negative.onClick(e)) hideDialog(dialog)
-      });
-    }
-    if (options.positive) {
-      options.positive = $.extend({onClick: ()=> false}, options.positive);
-
-      $('#positive').click((e: any) => {
-        e.preventDefault();
-        if (!options.positive.onClick(e)) hideDialog(dialog)
-      });
-    }
+  ngOnInit() {
+    this._modalElement = document.getElementById('confirmationModal');
+    this._cancelButton = document.getElementById('cancelButton');
+    this._okButton = document.getElementById('okButton');
   }
-  componentHandler.upgradeDom();
 
-  if (options.cancelable) {
-    dialog.click(() => {
-      hideDialog(dialog);
-      return options.negative.onClick();
+  activate() {
+    this.title = this._modalService.title;
+    this.message = this._modalService.message;
+    this.okText = this._modalService.okText;
+    this.cancelText = this._modalService.cancelText;
+
+    let promise = new Promise<boolean>((resolve, reject) => {
+      this.negativeOnClick = (e: any) => resolve(false);
+      this.positiveOnClick = (e: any) => resolve(true);
+      this.show();
     });
-    $(document).bind('keyup.dialog', (e: any) => {
+
+    return promise;
+  }
+
+  private show() {
+    $(document).unbind(KEYUP_DIALOG);
+
+    this._modalElement.style.display = 'inline';
+
+    this._cancelButton.onclick = ((e: any) => {
+      e.preventDefault();
+      if (!this.negativeOnClick(e)) this.hideDialog()
+    });
+
+    this._okButton.onclick = ((e: any) => {
+      e.preventDefault();
+      if (!this.positiveOnClick(e)) this.hideDialog()
+    });
+
+    componentHandler.upgradeDom();
+
+    this._modalElement.onclick = () => {
+      this.hideDialog();
+      return this.negativeOnClick(null);
+    });
+    $(document).bind(KEYUP_DIALOG, (e: any) => {
       if (e.which == KEY_ESC) {
-        hideDialog(dialog);
-        return options.negative.onClick();
+        this.hideDialog();
+        return this.negativeOnClick(null);
       }
     });
-  }
-  setTimeout(() => { dialog.css({opacity: 1}); }, 1);
-}
 
-function hideDialog(dialog: any) {
-  $(document).unbind('keyup.dialog');
-  dialog.css({opacity: 0});
-  setTimeout(() => { dialog.css({display: 'none'}); }, 400);
+    setTimeout(() => { this._modalElement.style.opacity = 1; }, 1);
+  }
+
+  private hideDialog() {
+    $(document).unbind(KEYUP_DIALOG);
+    this._modalElement.style.opacity = 0;
+    setTimeout(() => { this._modalElement.style.display = 'none'; }, 400);
+  }
 }
