@@ -126,9 +126,13 @@ function showDialog(options: any) {
   if (options.cancelable) {
     dialog.click(function() {
       hideDialog(dialog);
+        return options.negative.onClick();
     });
     $(document).bind("keyup.dialog", function(e: any) {
-      if (e.which == 27) hideDialog(dialog);
+      if (e.which == 27) {
+        hideDialog(dialog);
+        return options.negative.onClick();
+      }
     });
     content.click(function(e: any) {
       e.stopPropagation();
