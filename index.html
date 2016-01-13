@@ -7,62 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <script src="assets/material.min.js"></script>
-  <!--<link href="assets/material.indigo-pink.min.css" rel="stylesheet">-->
-  <!--<link href="assets/material.blue-pink.min.css" rel="stylesheet">-->
   <link href="assets/material.deep_orange-pink.min.css" rel="stylesheet">
   <link href="assets/sprite-av-white.css" rel="stylesheet">
-
-
-  <script src="assets/zepto.js"></script>
-
-  <style>
-
-.dialog-container,
-.loading-container {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    overflow: scroll;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 9999;
-    opacity: 0;
-    -webkit-transition: opacity 400ms ease-in;
-    -moz-transition: opacity 400ms ease-in;
-    transition: opacity 400ms ease-in;
-}
-
-.dialog-container > div {
-    position: relative;
-    width: 90%;
-    max-width: 500px;
-    min-height: 25px;
-    margin: 10% auto;
-    z-index: 99999;
-    padding: 16px 16px 0;
-}
-
-.dialog-button-bar {
-    text-align: right;
-    margin-top: 8px;
-}
-
-.loading-container > div {
-    position: relative;
-    width: 50px;
-    height: 50px;
-    margin: 10% auto;
-    z-index: 99999;
-}
-
-.loading-container > div > div {
-    width: 100%;
-    height: 100%;
-}
-
-  </style>
-
 
   <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
   <script src="node_modules/systemjs/dist/system.src.js"></script>
@@ -75,6 +21,7 @@
     System.import('app/boot')
           .then(null, console.error.bind(console));
   </script>
+
 </head>
 
 <body>
