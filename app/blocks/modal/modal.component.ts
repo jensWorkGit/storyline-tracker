@@ -1,41 +1,40 @@
-import { Component, EventEmitter } from 'angular2/core';
+import { Component } from 'angular2/core';
 
 @Component({
-  selector: 'my-modal',
-  // templateUrl: 'app/blocks/modal/modal.component.html',
+  selector: 'modal-confirm',
   template: '',
-  styleUrls: ['app/blocks/modal/modal.component.css'],
-  outputs: ['okayed']
+  styleUrls: ['app/blocks/modal/modal.component.css']
+  // inputs: ['title', 'message', 'okText', 'cancelText']
 })
 export class ModalComponent {
-
-  okayed: EventEmitter<string>;
-
-  constructor() {
-    this.okayed = new EventEmitter();
-  }
+  title: string;
+  message: string;
+  okText: string;
+  cancelText: string;
 
   showDialog() {
-    showDialog({
-      title: 'Hold Your Horses!',
-      text: 'Do you want to cancel your changes?',
-      negative: {
-        title: 'Cancel',
-        onClick: function(e: any) {
-          console.log('Modal Canceled');
-          this.okayed.next(false);
+    return new Promise<boolean>((resolve, reject) => {
+      let options = {
+        title: this.title || 'Confirmation',
+        text: this.message || 'Do you want to cancel your changes?',
+        negative: {
+          title: this.cancelText || 'Cancel',
+          onClick: function(e: any) {
+            console.log('Modal Canceled');
+            return resolve(false);
+          }
+        },
+        positive: {
+          title: this.okText || 'OK',
+          onClick: function(e: any) {
+            console.log('Modal Okayed');
+            return resolve(true);
+          }
         }
-      },
-      positive: {
-        title: 'OK',
-        onClick: function(e: any) {
-          console.log('Modal OKayed');
-          this.okayed.next(true);
-        }
-      }
+      };
+      showDialog(options);
     });
   }
-
 
   ///////////////
 
@@ -129,9 +128,13 @@ function showDialog(options: any) {
   if (options.cancelable) {
     dialog.click(function() {
       hideDialog(dialog);
+        return options.negative.onClick();
     });
     $(document).bind("keyup.dialog", function(e: any) {
-      if (e.which == 27) hideDialog(dialog);
+      if (e.which == 27) {
+        hideDialog(dialog);
+        return options.negative.onClick();
+      }
     });
     content.click(function(e: any) {
       e.stopPropagation();

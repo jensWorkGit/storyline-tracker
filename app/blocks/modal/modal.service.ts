@@ -2,14 +2,6 @@ import { Injectable } from 'angular2/core';
 
 @Injectable()
 export class ModalService {
-
-  // confirm(message?:string) {
-  //   // return new Promise<boolean>((resolve, reject) =>
-  //   //   resolve(window.confirm(message || 'Is it OK?')));
-  //   return new Promise<boolean>((resolve, reject) =>
-  //     resolve(window.confirm(message || 'Is it OK?')));
-  // };
-
   showDialog() {
     return new Promise<boolean>((resolve, reject) => {
       let options = {

@@ -4,16 +4,15 @@ import { CanDeactivate, ComponentInstruction, RouteParams, Router, ROUTER_DIRECT
 import { Character } from '../characters/character';
 import { CharacterService } from '../characters/character.service';
 import { CONFIG } from '../config';
-// import { DialogService } from '../blocks/dialog.service';
-// import { ModalComponent } from '../blocks/modal/modal.component';
-import { ModalService } from '../blocks/modal/modal.service';
+import { ModalComponent } from '../blocks/modal/modal.component';
+// import { ModalService } from '../blocks/modal/modal.service';
 
 @Component({
   selector: 'taba-character-detail',
   templateUrl: 'app/characters/character-detail.component.html',
   styles: ['.mdl-textfield__label {top: 0;}'],
-  directives: [ROUTER_DIRECTIVES], //, ModalComponent],
-  providers: [ModalService]
+  directives: [ROUTER_DIRECTIVES, ModalComponent]
+  // providers: [ModalService]
 })
 export class CharacterDetailComponent implements CanDeactivate, OnChanges, OnInit {
   @Input()
@@ -22,13 +21,12 @@ export class CharacterDetailComponent implements CanDeactivate, OnChanges, OnIni
 
   constructor(
     private _characterService: CharacterService,
-    // private _dialogService: DialogService,
-    private _modalService: ModalService,
+    // private _modalService: ModalService,
     private _routeParams: RouteParams,
     private _router: Router) {
   }
 
-  // @ViewChild(ModalComponent) modal: ModalComponent;
+  @ViewChild(ModalComponent) modal: ModalComponent;
 
   gotoCharacters() {
     let route = ['Characters', { id: this.character ? this.character.id : null }]
@@ -44,12 +42,8 @@ export class CharacterDetailComponent implements CanDeactivate, OnChanges, OnIni
 
     return !this.character ||
       this.character.name === this.editName ||
-      // this._dialogService.confirm('Discard changes?');
-      this._modalService.showDialog();
-
-    // return !this.character ||
-    //   this.character.name === this.editName ||
-    //   this._dialogService.confirm('Discard changes?');
+      this.modal.showDialog();
+      // this._modalService.showDialog();
   }
 
   cancel() {
