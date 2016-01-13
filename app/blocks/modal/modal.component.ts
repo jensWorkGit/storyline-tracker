@@ -48,7 +48,8 @@ export class ModalComponent implements OnInit {
   private show() {
     document.onkeyup = null;
 
-    this._modalElement.style.display = 'inline';
+    this._modalElement.style.opacity = 0;
+    this._modalElement.style.zIndex = 9999;
 
     this._cancelButton.onclick = ((e: any) => {
       e.preventDefault();
@@ -74,12 +75,12 @@ export class ModalComponent implements OnInit {
       }
     };
 
-    window.setTimeout(() => { this._modalElement.style.opacity = 1; }, 1);
+    this._modalElement.style.opacity = 1;
   }
 
   private hideDialog() {
     document.onkeyup = null;
     this._modalElement.style.opacity = 0;
-    window.setTimeout(() => { this._modalElement.style.display = 'none'; }, 400);
+    window.setTimeout(() => { this._modalElement.style.zIndex = 0; }, 400);
   }
 }
