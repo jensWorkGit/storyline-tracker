@@ -1,5 +1,6 @@
-<div *ngIf="character">
-  <h4>{{editName | uppercase}} details</h4>
+<article class="template animate slideInRight">
+  <div *ngIf="character">
+    <h4>{{editName | uppercase}} details</h4>
 
     <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
       <label class="mdl-textfield__label" for="nametext">Name</label>
@@ -14,4 +15,5 @@
       " (click)="cancel()">Cancel</button>
     </div>
 
-</div>
+  </div>
+</article>
