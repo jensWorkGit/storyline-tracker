@@ -1,8 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from 'angular2/core';
 import { CanDeactivate, ComponentInstruction, RouteParams, Router, ROUTER_DIRECTIVES } from 'angular2/router';
 
-import { Character } from '../characters/character';
-import { CharacterService } from '../characters/character.service';
+import { Character, CharacterService } from '../characters/character.service';
 import { CONFIG } from '../config';
 import { ModalService } from '../blocks/modal/modal.service';
 
@@ -16,6 +15,7 @@ export class CharacterDetailComponent implements CanDeactivate, OnChanges, OnIni
   @Input()
   character: Character;
   editName: string;
+  editSide: string;
 
   constructor(
     private _characterService: CharacterService,
@@ -32,16 +32,19 @@ export class CharacterDetailComponent implements CanDeactivate, OnChanges, OnIni
   routerCanDeactivate(next: ComponentInstruction, prev: ComponentInstruction) {
     return !this.character ||
       this.character.name === this.editName ||
+      this.character.side === this.editSide ||
       this._modalService.activate();
   }
 
   cancel() {
     this.editName = this.character.name;
+    this.editSide = this.character.side;
     this.gotoCharacters();
   }
 
   save() {
     this.character.name = this.editName;
+    this.character.side = this.editSide;
     this.gotoCharacters();
   }
 
@@ -68,6 +71,7 @@ export class CharacterDetailComponent implements CanDeactivate, OnChanges, OnIni
   private setCharacter(character: Character) {
     if (character) {
       this.editName = character.name;
+      this.editSide = character.side;
       this.character = character;
     } else {
       this.gotoCharacters();

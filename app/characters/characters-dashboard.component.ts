@@ -8,7 +8,6 @@ import { CharacterService } from './character.service';
 @Component({
   selector: 'taba-character-dashboard',
   template: `
-    <!-- <h2>Character Dashboard</h2> -->
     <router-outlet></router-outlet>
   `,
   directives: [ROUTER_DIRECTIVES]

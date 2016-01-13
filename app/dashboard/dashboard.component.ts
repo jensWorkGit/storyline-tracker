@@ -1,7 +1,6 @@
 import { Component, OnInit } from 'angular2/core';
 import { Router } from 'angular2/router';
-import { Character } from '../characters/character';
-import { CharacterService } from '../characters/character.service';
+import { Character, CharacterService } from '../characters/character.service';
 import { CONFIG } from '../config';
 
 @Component({

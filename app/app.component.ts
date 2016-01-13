@@ -2,7 +2,7 @@ import { Component } from 'angular2/core';
 import { HTTP_PROVIDERS } from 'angular2/http';
 import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
 
-import { BindingComponent } from './binding/binding.component';
+import { VehiclesDashboardComponent } from './vehicles/vehicles-dashboard.component';
 import { CharactersDashboardComponent } from './characters/characters-dashboard.component';
 import { CharacterService } from './characters/character.service';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -18,13 +18,13 @@ import { ModalComponent } from './blocks/modal/modal.component';
 })
 @RouteConfig([
   { path: '/dashboard', name: 'Dashboard', component: DashboardComponent, useAsDefault: true },
-  { path: '/binding', name: 'Binding', component: BindingComponent },
+  { path: '/vehicles/...', name: 'Vehicles', component: VehiclesDashboardComponent },
 	{ path: '/characters/...', name: 'CharactersDashboard', component: CharactersDashboardComponent	},
 ])
 export class AppComponent {
   public menuItems = [
     { caption: 'Dashboard', link: ['Dashboard'] },
     { caption: 'Characters', link: ['CharactersDashboard'] },
-    { caption: 'Binding', link: ['Binding'] }
+    { caption: 'Vehicles', link: ['Vehicles'] }
   ];
 }

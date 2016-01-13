@@ -1,18 +1,23 @@
 import { Injectable } from 'angular2/core';
 import { Http, Response } from 'angular2/http';
-import { Character } from './character';
 import { Observable, Subscription } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
+export interface Character {
+	id: number;
+	name: string;
+  side: string;
+}
+
 @Injectable()
 export class CharacterService {
-  subscription : Subscription<Character>;
+  subscription : Subscription; //<Character>;
 
   constructor(private _http: Http) { }
 
   getCharacters_ViaPromise() {
-    let promise = this._http.get('characters.json')
+    let promise = this._http.get('data/characters.json')
       .map((response: Response) => <Character[]>response.json())
       .toPromise()
       .catch(fetchFailed);
@@ -21,7 +26,7 @@ export class CharacterService {
   }
 
   getCharacters() {
-    let observable = this._http.get('characters.json')
+    let observable = this._http.get('data/characters.json')
       .map((response: Response) => <Character[]>response.json())
 
     // TODO: learning moment.
@@ -41,7 +46,7 @@ export class CharacterService {
   }
 
   getCharacter_ViaPromise(id: number) {
-    return this._http.get('characters.json')
+    return this._http.get('data/characters.json')
       .map((response: Response) => {
         return response.json().filter((c: Character) => { return c.id === id; })[0]
       })
@@ -50,7 +55,7 @@ export class CharacterService {
   }
 
   getCharacter(id: number) {
-    return this._http.get('characters.json')
+    return this._http.get('data/characters.json')
       .map((response: Response) => {
         return response.json().filter((c: Character) => { return c.id === id; })[0]
       })
