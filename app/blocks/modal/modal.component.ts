@@ -1,9 +1,7 @@
 import { Component, OnInit } from 'angular2/core';
 import { ModalService } from './modal.service'
 
-declare var $: any;
 const KEY_ESC = 27;
-const KEYUP_DIALOG = 'keyup.dialog';
 
 @Component({
   selector: 'modal-confirm',
@@ -48,7 +46,7 @@ export class ModalComponent implements OnInit {
   }
 
   private show() {
-    $(document).unbind(KEYUP_DIALOG);
+    document.onkeyup = null;
 
     this._modalElement.style.display = 'inline';
 
@@ -67,20 +65,21 @@ export class ModalComponent implements OnInit {
     this._modalElement.onclick = () => {
       this.hideDialog();
       return this.negativeOnClick(null);
-    });
-    $(document).bind(KEYUP_DIALOG, (e: any) => {
+    };
+
+    document.onkeyup = (e: any) => {
       if (e.which == KEY_ESC) {
         this.hideDialog();
         return this.negativeOnClick(null);
       }
-    });
+    };
 
-    setTimeout(() => { this._modalElement.style.opacity = 1; }, 1);
+    window.setTimeout(() => { this._modalElement.style.opacity = 1; }, 1);
   }
 
   private hideDialog() {
-    $(document).unbind(KEYUP_DIALOG);
+    document.onkeyup = null;
     this._modalElement.style.opacity = 0;
-    setTimeout(() => { this._modalElement.style.display = 'none'; }, 400);
+    window.setTimeout(() => { this._modalElement.style.display = 'none'; }, 400);
   }
 }
