@@ -1,10 +1,11 @@
 import { Component } from 'angular2/core';
+import { ModalService } from './modal.service'
 
 @Component({
   selector: 'modal-confirm',
   templateUrl:'app/blocks/modal/modal.component.html',
-  styleUrls: ['app/blocks/modal/modal.component.css']
-  // inputs: ['title', 'message', 'okText', 'cancelText']
+  styleUrls: ['app/blocks/modal/modal.component.css'],
+  providers: [ModalService]
 })
 export class ModalComponent {
   title: string;
@@ -12,7 +13,14 @@ export class ModalComponent {
   okText: string;
   cancelText: string;
 
+  constructor(private _modalService: ModalService) {}
+
   showDialog() {
+    // this.title = this._modalService.config.title || this.title;
+    // this.message = this._modalService.config.message || this.message;
+    // this.okText = this._modalService.config.okText || this.okText;
+    // this.cancelText = this._modalService.config.cancelText || this.cancelText;
+
     return new Promise<boolean>((resolve, reject) => {
       let options = {
         title: this.title = this.title || 'Confirmation',
@@ -29,10 +37,10 @@ export class ModalComponent {
       showDialog(options);
     });
   }
-
 }
 
 declare var $: any;
+const KEY_ESC = 27;
 
 function showDialog(options: any) {
   options = $.extend({
@@ -44,7 +52,7 @@ function showDialog(options: any) {
     cancelable: true
   }, options);
 
-  $(document).unbind("keyup.dialog");
+  $(document).unbind('keyup.dialog');
 
   var dialog = $('#theModalDialog');
   dialog.css({ display: 'inline' });
@@ -53,18 +61,16 @@ function showDialog(options: any) {
     var buttonBar = $('.dialog-button-bar');
     if (options.negative) {
       options.negative = $.extend({ onClick: () => false }, options.negative);
-      var negButton = $('#negative');
 
-      negButton.click((e: any) => {
+      $('#negative').click((e: any) => {
         e.preventDefault();
         if (!options.negative.onClick(e)) hideDialog(dialog)
       });
     }
     if (options.positive) {
       options.positive = $.extend({onClick: ()=> false}, options.positive);
-      var posButton = $('#positive');
 
-      posButton.click((e: any) => {
+      $('#positive').click((e: any) => {
         e.preventDefault();
         if (!options.positive.onClick(e)) hideDialog(dialog)
       });
@@ -78,7 +84,7 @@ function showDialog(options: any) {
       return options.negative.onClick();
     });
     $(document).bind('keyup.dialog', (e: any) => {
-      if (e.which == 27) {
+      if (e.which == KEY_ESC) {
         hideDialog(dialog);
         return options.negative.onClick();
       }
