@@ -6,6 +6,5 @@ export class ModalService {
   message: string = 'Do you want to cancel?';
   cancelText: string = 'Cancel';
   okText: string = 'OK';
-  // activate: () => Promise<boolean>;
-  activate: any;
+  activate: () => Promise<boolean>;
 }
