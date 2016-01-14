@@ -23,7 +23,6 @@ export class CharactersComponent implements OnInit {
   constructor(
     private _filterService: FilterService,
     private _characterService: CharacterService) {
-    componentHandler.upgradeDom();
   }
 
   getCharacters() {

@@ -22,14 +22,13 @@ export class VehiclesComponent implements OnInit {
 
   constructor(
     private _filterService: FilterService,
-    private _VehicleService: VehicleService) {
-    componentHandler.upgradeDom();
+    private _vehicleService: VehicleService) {
   }
 
   getVehicles() {
     this.vehicles = [];
 
-    this._VehicleService.getVehicles()
+    this._vehicleService.getVehicles()
       .subscribe((vehicles: Vehicle[]) => {
         this.vehicles = this.filteredVehicles = vehicles
       });
