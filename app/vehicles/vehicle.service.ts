@@ -17,7 +17,7 @@ export class VehicleService {
   constructor(private _http: Http) { }
 
   getVehicles() {
-    let observable = this._http.get('data/vehicles.json')
+    let observable = this._http.get('https://storyline-johnpapa.c9users.io/api/vehicles')
       .map((response: Response) => <Vehicle[]>response.json())
 
     this.subscription = observable.subscribe(
@@ -30,10 +30,8 @@ export class VehicleService {
   }
 
   getVehicle(id: number) {
-    return this._http.get('data/vehicles.json')
-      .map((response: Response) => {
-        return response.json().filter((v: Vehicle) => { return v.id === id; })[0]
-      })
+    return this._http.get(`https://storyline-johnpapa.c9users.io/api/vehicles/${id}`)
+      .map((response: Response) => <Vehicle>response.json());
   }
 }
 
