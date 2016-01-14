@@ -1,3 +1,3 @@
 export let CONFIG = {
-  useHttpWithRx: false
+  useHttpWithRx: true
 }
