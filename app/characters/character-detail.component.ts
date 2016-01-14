@@ -31,9 +31,13 @@ export class CharacterDetailComponent implements CanDeactivate, OnChanges, OnIni
 
   routerCanDeactivate(next: ComponentInstruction, prev: ComponentInstruction) {
     return !this.character ||
-      this.character.name === this.editName ||
-      this.character.side === this.editSide ||
+      !this.isDirty() ||
       this._modalService.activate();
+  }
+
+  isDirty() {
+    return this.character.name !== this.editName ||
+      this.character.side !== this.editSide;
   }
 
   cancel() {

@@ -31,9 +31,13 @@ export class VehicleDetailComponent implements CanDeactivate, OnChanges, OnInit 
 
   routerCanDeactivate(next: ComponentInstruction, prev: ComponentInstruction) {
     return !this.vehicle ||
-      this.vehicle.name === this.editName ||
-      this.vehicle.type === this.editType ||
+      !this.isDirty() ||
       this._modalService.activate();
+  }
+
+  isDirty() {
+    return this.vehicle.name !== this.editName ||
+      this.vehicle.type !== this.editType;
   }
 
   cancel() {
