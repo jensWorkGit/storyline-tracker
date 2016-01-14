@@ -61,7 +61,7 @@ export class ModalComponent implements OnInit {
       if (!this.positiveOnClick(e)) this.hideDialog()
     });
 
-    componentHandler.upgradeDom();
+    //componentHandler.upgradeDom();
 
     this._modalElement.onclick = () => {
       this.hideDialog();

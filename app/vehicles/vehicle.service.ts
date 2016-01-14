@@ -12,7 +12,7 @@ export interface Vehicle {
 
 @Injectable()
 export class VehicleService {
-  subscription : Subscription; //<Vehicle>;
+  subscription : Subscription<Vehicle>; //<Vehicle>;
 
   constructor(private _http: Http) { }
 

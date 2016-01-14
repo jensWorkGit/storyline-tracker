@@ -2,5 +2,8 @@
 <project version="4">
   <component name="TypeScriptCompiler">
     <option name="isCompilerEnabled" value="true" />
+    <option name="typeScriptServiceDirectory" value="C:\Programmierung\examples\angular2-tour-of-heroes\node_modules\typescript\lib" />
+    <option name="typeScriptCompilerParams" value="--module commonjs --target es5 --experimentalDecorators" />
+    <option name="versionType" value="SERVICE_DIRECTORY" />
   </component>
 </project>

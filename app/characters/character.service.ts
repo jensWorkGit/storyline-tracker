@@ -12,7 +12,7 @@ export interface Character {
 
 @Injectable()
 export class CharacterService {
-  subscription : Subscription; //<Character>;
+  subscription : Subscription<Character>; //<Character>;
 
   constructor(private _http: Http) { }
 

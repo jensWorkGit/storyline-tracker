@@ -57,7 +57,7 @@ export class VehicleDetailComponent implements CanDeactivate, OnChanges, OnInit 
   }
 
   ngOnInit() {
-    componentHandler.upgradeDom();
+    //componentHandler.upgradeDom();
 
     if (!this.vehicle) {
       let id = +this._routeParams.get('id');

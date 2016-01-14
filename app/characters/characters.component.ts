@@ -44,7 +44,7 @@ export class CharactersComponent implements OnInit {
   }
 
   ngOnInit() {
-    componentHandler.upgradeDom();
+    //componentHandler.upgradeDom();
     this.characters = this.getCharacters();
   }
 

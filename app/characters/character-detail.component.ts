@@ -57,7 +57,7 @@ export class CharacterDetailComponent implements CanDeactivate, OnChanges, OnIni
   }
 
   ngOnInit() {
-    componentHandler.upgradeDom();
+    //componentHandler.upgradeDom();
 
     if (!this.character) {
       let id = +this._routeParams.get('id');

@@ -37,7 +37,7 @@ export class VehiclesComponent implements OnInit {
   }
 
   ngOnInit() {
-    componentHandler.upgradeDom();
+    //componentHandler.upgradeDom();
     this.vehicles = this.getVehicles();
   }
 
