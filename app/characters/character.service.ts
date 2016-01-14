@@ -17,7 +17,7 @@ export class CharacterService {
   constructor(private _http: Http) { }
 
   getCharacters_ViaPromise() {
-    let promise = this._http.get('data/characters.json')
+    let promise = this._http.get('api/characters')
       .map((response: Response) => <Character[]>response.json())
       .toPromise()
       .catch(fetchFailed);
@@ -26,8 +26,10 @@ export class CharacterService {
   }
 
   getCharacters() {
-    let observable = this._http.get('data/characters.json')
-      .map((response: Response) => <Character[]>response.json())
+    let observable = this._http.get('api/characters')
+      .map((response: Response) => {
+        return <Character[]>response.json();
+      });
 
     // TODO: learning moment.
     // if i want to subscribe here and do something with the data, or handle errors.
@@ -46,19 +48,15 @@ export class CharacterService {
   }
 
   getCharacter_ViaPromise(id: number) {
-    return this._http.get('data/characters.json')
-      .map((response: Response) => {
-        return response.json().filter((c: Character) => { return c.id === id; })[0]
-      })
+    return this._http.get(`api/characters/${id}`)
+      .map((response: Response) => <Character>response.json())
       .toPromise()
       .catch(fetchFailed);
   }
 
   getCharacter(id: number) {
-    return this._http.get('data/characters.json')
-      .map((response: Response) => {
-        return response.json().filter((c: Character) => { return c.id === id; })[0]
-      })
+    return this._http.get(`api/characters/${id}`)
+      .map((response: Response) => <Character>response.json());
   }
 }
 
