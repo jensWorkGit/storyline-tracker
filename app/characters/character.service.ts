@@ -17,7 +17,7 @@ export class CharacterService {
   constructor(private _http: Http) { }
 
   getCharacters_ViaPromise() {
-    let promise = this._http.get('https://storyline-johnpapa.c9users.io/api/characters')
+    let promise = this._http.get('data/characters.json')
       .map((response: Response) => <Character[]>response.json())
       .toPromise()
       .catch(fetchFailed);
@@ -26,7 +26,7 @@ export class CharacterService {
   }
 
   getCharacters() {
-    let observable = this._http.get('https://storyline-johnpapa.c9users.io/api/characters')
+    let observable = this._http.get('data/characters.json')
       .map((response: Response) => <Character[]>response.json())
 
     // TODO: learning moment.
@@ -46,15 +46,19 @@ export class CharacterService {
   }
 
   getCharacter_ViaPromise(id: number) {
-    return this._http.get(`https://storyline-johnpapa.c9users.io/api/characters/${id}`)
-      .map((response: Response) => <Character>response.json())
+    return this._http.get('data/characters.json')
+      .map((response: Response) => {
+        return response.json().filter((c: Character) => { return c.id === id; })[0]
+      })
       .toPromise()
       .catch(fetchFailed);
   }
 
   getCharacter(id: number) {
-    return this._http.get(`https://storyline-johnpapa.c9users.io/api/characters/${id}`)
-      .map((response: Response) => <Character>response.json());
+    return this._http.get('data/characters.json')
+      .map((response: Response) => {
+        return response.json().filter((c: Character) => { return c.id === id; })[0]
+      })
   }
 }
 
